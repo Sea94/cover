@@ -1,13 +1,22 @@
 # CoVer
 
-Elderly people isolated at their homes during the COVID-19 crisis need an easy way to connect with volunteers available to provide rapid assistance because searching for help online is complicated while frequent requests to friends and relatives might be socially embarrassing.
+Elderly and ill people isolated at home need an easy way to connect with volunteers for rapid assistance as online help-seeking is hard while frequent requests to relatives cause social embarrassment.
 
-To address the problem and offer so much needed protection for older population, we offer **CoVer** ― a service to connect elderly people with volunteers by simple means of voice calls and sms.
+To address the problem and offer protection for the population in need during Covid crisis, we offer **CoVer** ― a service to connect people with **COV**id volunte**ER**s via simple and centralized phone calls and sms.
 
 ## Inspiration
-Almost 20% of the Swiss population, belonging to [65+ age group](https://tradingeconomics.com/switzerland/population-ages-65-and-above-percent-of-total-wb-data.html), fall into a high-risk category according to [Covid-19 regulations](https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/besonders-gefaehrdete-menschen.html). While a lot of volunteering services and support groups are emerging online, only [one third of elderly people](https://www.mediachange.ch/media//pdf/publications/SummaryReport_WIP-CH_2019.pdf) have a chance to reach out to their services since many still restrain from "going online". Some volunteers follow more traditional ways to suggest assistance for their elderly neighbors and leave paper notes on pinboards in shared hallways. However, one or two volunteers per building might not be enough to handle all the requests efficiently, not to say that older neighbors may find it embarrassing to burden their younger counterparts too much.
+Almost 20% of the Swiss population, belonging to [65+ age group](https://tradingeconomics.com/switzerland/population-ages-65-and-above-percent-of-total-wb-data.html), fall into a high-risk category according to [Covid-19 regulations](https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/besonders-gefaehrdete-menschen.html). While a lot of volunteering services and support groups are emerging online, only [one third of elderly people](https://www.mediachange.ch/media//pdf/publications/SummaryReport_WIP-CH_2019.pdf) have a chance to reach out to their services since many still restrain from "going online".
 
+Those who actually start searching for support on the world wide web may eventually get overwhelmed with an [abundance of means and resources](https://www.swissinfo.ch/eng/covid-19_solidarity-initiatives-fight-virus-fallout-in-switzerland/45620290): numerous Facebook groups, WhatsApp chats, websites, mobile applications and many more... It is difficult to decide whom to reach out in this choice overload.
 
+Some volunteers follow more traditional ways to suggest assistance for their elderly neighbors and leave paper notes on pinboards in shared hallways. However, one or two volunteers per building might not be enough to handle all the requests efficiently, not to say that fellow-neighbors may find it embarrassing to burden their younger or healthier counterparts too much.
 
 ## What it does
+
+This project aims to help elderly or sick people isolated at home and seeking for daily assistance (do grocery shopping, walk a dog, throw out trash, fix items, etc.). It aims to build a platform to connect these people with volunteers in the neighborhood ready to assist. The service allows a user to request help with SMS, phone call or through a web interface. The platform processes and sorts the requests according to their type. The volunteers available at the moment can accept a request and contact the person for further details. The requests are also displayed on a map for more convenience. The volunteer can receive notifications about new requests in the neighborhood on the fly, which facilitates and accelerates assistance.
+
+## How I built it
+
+To process incoming calls, we will use the [twilio](https://www.twilio.com) service along with a python-flask backend server. We will provide an interactive frontend with Vue.js. 
+The mobile app is likely to be written using the flutter framework.
 
