@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% set active_page = "login" %}
+
+{% block head %}
+    {{ super() }}
+    <title>Login</title>
+{% endblock %}
+
+
+{% block content %}
+	<div class="container mt-5" style='font-size:1.2em'>
+		
+		<div class="row justify-content-center mt-5 mb-4">
+			<div class="col-8 col-md-5 text-center">
+				<h3>Login</h3>
+			</div>
+		</div>
+
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+				<div class="row justify-content-center">
+					{% if category == "error" %}
+						<div class="alert alert-danger col-8 col-md-5">
+							<strong>Error: </strong> {{ message }}
+						</div>
+					{% elif category == "success" %}
+						<div class="alert alert-success col-8 col-md-5">
+							<strong>Success: </strong> {{ message }}
+						</div>
+					{% else %}
+						<div class="alert alert-primary col-8 col-md-5">
+							{{ message }}
+						</div>
+					{% endif %}
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+
+		<div class="row justify-content-center">
+			<form action="" method="POST" class="w-100 col-8 col-md-5">
+				{{ form.hidden_tag() }}
+				<div class="form-group row">
+					<label for="email" class="col-sm-3 col-form-label">Email</label>
+					<div class="col-sm-9">
+						<input type="email" class="form-control" id="email" name="email" placeholder="Your email" required>
+					</div>
+					{% for error in form.email.errors %}
+					<span style="color: red;">{{ error }}</span>
+					{% endfor %}
+				</div>
+				<div class="form-group row">
+					<label for="password" class="col-sm-3 col-form-label">Password</label>
+					<div class="col-sm-9">
+						<input type="password" class="form-control" id="password" name="password" placeholder="Your password" required>
+					</div>
+					{% for error in form.password.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				</div>
+				<div class="text-center">
+					<p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+					<button type="submit" class="btn btn-lg btn-primary w-50">Log in</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+{% endblock %}

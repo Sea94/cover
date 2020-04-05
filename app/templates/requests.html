@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% set active_page = "requests" %}
+
+{% block head %}
+    {{ super() }}
+    <title>Requests</title>
+{% endblock %}
+
+{% block content %}
+<div id="root">  
+    <div class="container">
+        <div class="row mt-2" style="height: 90%">
+            <div class="col-9">
+                <gmap-map
+                    :center="center"
+                    :zoom="8"
+                    map-type-id="roadmap"
+                    style="height: 100%"
+                    :options="{
+                        zoomControl: true,
+                        mapTypeControl: false,
+                        scaleControl: false,
+                        streetViewControl: false,
+                        rotateControl: false,
+                        fullscreenControl: false,
+                        disableDefaultUI: true
+                    }">
+                    <gmap-marker
+                        :key="index"
+                        v-for="(m, index) in markers"
+                        :position="m.position"
+                        :clickable="true"
+                        :draggable="true"
+                        @click="center=m.position"
+                        />
+                    </gmap-map>
+            </div>
+            <div class="col-3">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Take this request</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ url_for('static', filename='js/vue-google-maps.js') }}" crossorigin="anonymous"></script>
+
+    <script>
+        Vue.use(VueGoogleMaps, {
+            load: {
+                key: 'AIzaSyA5D1b5nP2qQ7ZCfcFPdFuiSilfSPEhODM',
+                libraries: 'places', // OR: libraries: 'places,drawing,visualization'
+            },
+            installComponents: true
+        })
+
+        document.addEventListener('DOMContentLoaded', function() {
+            new Vue({
+                el: '#root',
+                data: {
+                    center: {
+                        lat: 46.82,
+                        lng: 8.1
+                    },
+                    markers: [{
+                        position: {
+                            lat: 10.0,
+                            lng: 10.0
+                        }
+                    }, {
+                        position: {
+                            lat: 11.0,
+                            lng: 11.0
+                        }
+                    }]
+                },
+                methods: {
+                    load_position: function () {
+                        $.get("https://ipinfo.io?token=3780b24978d6b6", (response)  => {
+                            [this.center.lat, this.center.lng] = response.loc.split(",").map(parseFloat);
+                            console.log(this.center);
+                        }, "jsonp");
+                    }
+                },
+                created: function () {
+                    this.load_position();
+                }
+            });
+        });
+  </script>
+  
+  {% endblock %}

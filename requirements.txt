@@ -1,0 +1,7 @@
+flask
+flask_login
+flask-migrate
+flask-sqlalchemy
+flask_httpauth
+easydict
+click
