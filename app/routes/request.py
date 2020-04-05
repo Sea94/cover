@@ -45,10 +45,25 @@ def get_all_requests():
 @request_api.route('/api/request', methods=['POST'])
 def post_request():
     print(request)
-    data = request.get_json()["queryResult"]["parameters"]
+
+    # data = request.get_json()["queryResult"]["parameters"]
+
+    result = request.get("queryResult")
+    data = result.get("parameters")
+
+    phone = data["name"]
+    
+    context = result["outputContexts"]
+    context_parameters = context[0].get("parameters")
+
+    if 'caller_id' in context_parameters.keys():
+        phone = context_parameters['caller_id']
+
+    
+
     Request.add({
         "name": data["name"],
-        "phone": data["name"],
+        "phone": context_parameters["caller_id"],
         "address": data["address"]["city"] + " " + data["address"]["street-address"],
         "category": data["service"],
         "request": ""
