@@ -5,3 +5,4 @@ flask-sqlalchemy
 flask_httpauth
 easydict
 click
+flask_wtf
