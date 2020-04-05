@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, jsonify, request
 from flask_login import login_required
 
 from app.models import Request
@@ -35,3 +35,23 @@ def post_help_request():
 def show_requests():
     return render_template("requests.html")
 
+
+@request_api.route('/api/requests')
+def get_all_requests():
+    requests = Request.query.all()
+    return jsonify([{ "name": r.name, "address": r.address, "category": r.category} for r in requests])
+
+
+@request_api.route('/api/request', methods=['POST'])
+def post_request():
+    print(request)
+    data = request.get_json()["queryResult"]["parameters"]
+    Request.add({
+        "name": data["name"],
+        "phone": data["name"],
+        "address": data["address"]["city"] + " " + data["address"]["street-address"],
+        "category": data["service"],
+        "request": ""
+    })
+    return ""
+    # dump(data)
