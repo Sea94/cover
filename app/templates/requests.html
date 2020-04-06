@@ -13,7 +13,7 @@
             <div class="col-9">
                 <gmap-map
                     :center="center"
-                    :zoom="8"
+                    :zoom="10"
                     map-type-id="roadmap"
                     style="height: 100%"
                     :options="{
@@ -112,7 +112,7 @@
                     }
                 },
                 created: function () {
-                    //this.load_position();
+                    this.load_position();
                     this.load_requests();
                     this.load_user();
                 }
