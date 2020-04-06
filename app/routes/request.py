@@ -77,8 +77,7 @@ def get_my_requests():
 
 @request_api.route('/api/request', methods=['POST'])
 def post_request():
-    print(request)
-    result = request.get("queryResult")
+    result = request.get_json().get("queryResult")
     data = result.get("parameters")
 
     context_parameters = result["outputContexts"][0].get("parameters")
