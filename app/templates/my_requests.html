@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% set active_page = "my-requests" %}
+
+{% block head %}
+    {{ super() }}
+    <title>Requests</title>
+{% endblock %}
+
+{% block content %}
+<div id="root">  
+    <div v-cloak class="container">
+        <div class="row mt-2">
+            <div v-for="request in requests" class="col-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title">Request from <strong>${request.name}</strong></h5>
+                            <p class="card-text">
+                                <p><span class="font-weight-bold">Category:</span> ${request.category}</p>
+                                <p><span class="font-weight-bold">Phone: </span>${request.phone}</p>
+                                <p><span class="font-weight-bold">Address: </span>${request.address}</p>
+                                <p>${request.request}</p>
+                            </p>
+                            <button class="btn btn-primary" @click="finish_request(request)">Mark as done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ url_for('static', filename='js/vue-google-maps.js') }}" crossorigin="anonymous"></script>
+
+    <script>
+        Vue.use(VueGoogleMaps, {
+            load: {
+                key: 'AIzaSyA5D1b5nP2qQ7ZCfcFPdFuiSilfSPEhODM',
+                libraries: 'places', // OR: libraries: 'places,drawing,visualization'
+            },
+            installComponents: true
+        })
+        
+        var app;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            app = new Vue({
+                el: '#root',
+                delimiters: ['${', '}'],
+                data: {
+                    requests: [],
+                    user: ""
+                },
+                methods: {
+                    load_requests: function () {
+                        $.get("/api/my-requests").then((requests) => {
+                            for (i in requests) {
+                                this.$set(this.requests, i, requests[i]);
+                            }
+                        });
+                    },
+                    finish_request: function (request) {
+                        $.get("/api/finish-request", { "id": request.id }).then(() => {
+                            this.requests.splice(this.requests.indexOf(request), 1);
+                        })
+                    }
+                },
+                created: function () {
+                    this.load_requests();
+                }
+            });
+        });
+  </script>
+  
+  {% endblock %}

@@ -56,6 +56,7 @@ class User(UserMixin, db.Model):
     def add(cls, data):
         user = User(
             name=data["name"],
+            address=data["address"],
             email=data["email"],
             password_hash=generate_password_hash(data["password"]),
         )

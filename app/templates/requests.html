@@ -13,7 +13,7 @@
             <div class="col-9">
                 <gmap-map
                     :center="center"
-                    :zoom="8"
+                    :zoom="10"
                     map-type-id="roadmap"
                     style="height: 100%"
                     :options="{
@@ -27,22 +27,31 @@
                     }">
                     <gmap-marker
                         :key="index"
-                        v-for="(m, index) in markers"
+                        v-for="(m, index) in requests"
                         :position="m.position"
                         :clickable="true"
                         :draggable="true"
-                        @click="center=m.position"
+                        @click="current_request = m"
                         />
                     </gmap-map>
             </div>
             <div class="col-3">
-                <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Take this request</a>
+                <div v-if="current_request != null" class="card">
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title">Request from ${current_request.name}</h5>
+                            <p class="card-text">
+                                <strong>Category ${current_request.category}</strong>
+                            </p>
+                            <p class="card-text">
+                                ${current_request.request}
+                            </p>
+                            <button v-if="user == ''" class="btn btn-primary" disabled>Login to take this request</button>
+                            <button v-else class="btn btn-primary" @click="take_request">Take this request</button>
+                        </div>
+                    </div>
                 </div>
-                </div>
+                <div v-else class="text-center">Select a request</div>
             </div>
         </div>
     </div>
@@ -63,37 +72,49 @@
             },
             installComponents: true
         })
+        
+        var app;
 
         document.addEventListener('DOMContentLoaded', function() {
-            new Vue({
+            app = new Vue({
                 el: '#root',
+                delimiters: ['${', '}'],
                 data: {
                     center: {
                         lat: 46.82,
                         lng: 8.1
                     },
-                    markers: [{
-                        position: {
-                            lat: 10.0,
-                            lng: 10.0
-                        }
-                    }, {
-                        position: {
-                            lat: 11.0,
-                            lng: 11.0
-                        }
-                    }]
+                    current_request: null,
+                    requests: [],
+                    user: ""
                 },
                 methods: {
                     load_position: function () {
-                        $.get("https://ipinfo.io?token=3780b24978d6b6", (response)  => {
+                        $.get("https://ipinfo.io?token=3780b24978d6b6", (response) => {
                             [this.center.lat, this.center.lng] = response.loc.split(",").map(parseFloat);
-                            console.log(this.center);
                         }, "jsonp");
+                    },
+                    load_requests: function () {
+                        $.get("/api/requests").then((requests) => {
+                            for (i in requests) {
+                                requests[i].position = {lat:requests[i].latitude, lng:requests[i].longitude};
+                                this.$set(this.requests, i, requests[i]);
+                            }
+                        });
+                    },
+                    load_user: async function () {
+                        this.user = (await $.get("/api/login")).email;
+                    },
+                    take_request: function () {
+                        $.get("/api/assign-request", {"id": this.current_request.id}).then(() => {
+                            location = "/my-requests"
+                        });
                     }
                 },
                 created: function () {
                     this.load_position();
+                    this.load_requests();
+                    this.load_user();
                 }
             });
         });

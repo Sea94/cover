@@ -1,3 +1,18 @@
 .iti__flag {
     background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.14/img/flags.png");
 }
+
+.btn-primary,
+.btn-primary:hover {
+    background-color: #ce60bc;
+    border-color: #ce60bc;
+}
+
+.btn-primary:active {
+    background-color: #509156 !important;
+    border-color: #509156 !important;
+}
+
+[v-cloak] {
+    display: none
+}

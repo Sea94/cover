@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import request, render_template, flash, redirect, url_for
+from flask import request, render_template, flash, redirect, url_for, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from easydict import EasyDict as edict
 
@@ -19,6 +19,7 @@ def register():
     if form.validate_on_submit():
         User.add({
             "name": form.name.data,
+            "address": form.address.data,
             "email": form.email.data,
             "password": form.password.data
         })
@@ -57,3 +58,11 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('app.index'))
+
+
+@login_api.route('/api/login', methods=['GET'])
+def get_login():
+    return jsonify({
+        "is_authenticated": current_user.is_authenticated,
+        "email": current_user.email if current_user.is_authenticated else ""
+    })
