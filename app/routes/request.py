@@ -87,7 +87,7 @@ def post_request():
     location = get_location(address)
 
     Request.add({
-        "name": data["name"],
+        "name": data["name"]["name"],
         "phone": phone,
         "address": address,
         "latitude": location["lat"],
