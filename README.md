@@ -6,7 +6,7 @@ To address the problem and offer protection for the population in need during Co
 
 ![Comic image](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/008/525/datas/original.png)
 
-Check our demo on [YouTube](https://youtu.be/-4HpdMKe7RA)!
+Check our demo on [YouTube](https://youtu.be/Lq2an4kMpYE)!
 
 ## Inspiration
 Almost 20% of the Swiss population, belonging to [65+ age group](https://tradingeconomics.com/switzerland/population-ages-65-and-above-percent-of-total-wb-data.html), fall into a high-risk category according to [Covid-19 regulations](https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/besonders-gefaehrdete-menschen.html). While a lot of volunteering services and support groups are emerging on the Internet, only [one third of senior people](https://www.mediachange.ch/media//pdf/publications/SummaryReport_WIP-CH_2019.pdf) have a chance to reach out to their services since many still restrain from "going online".
