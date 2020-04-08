@@ -34,7 +34,7 @@ We are proud to be a part of the community fighting against Covid.
 We put a lot of effort into making a minimal working prototype to showcase our project idea. We feel pumped up with what we managed to implement in just a couple of days: our first natural language phone bot, sophisticated interaction logic between applications and services, working web interface and nicely-looking mobile app mock-up (at least for us :) ).
 
 ## What I learned
-Voximplant, dialogflow, fluidUI, Vue.js map, 
+Voximplant, dialogflow, fluidUI, Vue.js map 
 
 ## What's next for COVER
 We participated in the hackathon mainly to share our idea with a broader community in order to attract professionals to take over the project and make it work in real life.
@@ -58,8 +58,27 @@ Extension: **699103171**  (wait for the voice to end before entering that number
 Please, go easy on the entity recognition part :)
 (It works best with English, quality should improve when other languages are included)
 
-## Other resources
+## Further resources
+
+### Other artefacts of our project
 Link to our [DEVPOST submission](https://devpost.com/software/cover-proposal)
 
 Short presentation in [Google slides](https://docs.google.com/presentation/d/11ZM3yo5WgekX-SUkJq9WxFlHTk-ADGQCUlLVa9IbD-g/edit?usp=sharing)
+
+### Tutorials & docs that we found useful for implementation
+
+Dialogflow:
+* [Dialogflow documentation](https://cloud.google.com/dialogflow/docs)
+
+Setup of Voximplant application:
+* [Building phone bot with Voximplant and api.ai](https://medium.com/@voximplant/building-phone-bot-with-voximplant-and-api-ai-3b9999a79184)
+* [How to use Dialogflow Connector (with Voximplant)](https://voximplant.com/blog/how-to-use-dialogflow-connector)
+* [Voximplant's Dialogflow Connector -> Setting Contexts](https://cogint.ai/voximplant-dialogflow-connector-2019/#settingcontexts)
+
+Communication of Dialogflow with your server using Fulfillment:
+* [Dialogflow Fulfillment: Webhook Tutorial Using Python (Flask)](https://www.pragnakalp.com/dialogflow-fulfillment-webhook-tutorial/)
+* [YouTube DialogFlow Tutorial - Fulfillment using a Local Webhook with ngrok](https://youtu.be/qd-3D2USCw0)
+
+Other:
+* [Potential alternative to Voximplant (Twilio)](https://www.twilio.com/docs/voice/tutorials/how-to-respond-to-incoming-phone-calls-python)
 
